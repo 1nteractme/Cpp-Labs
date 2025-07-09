@@ -3,5 +3,5 @@ These labs could be useful for c++ university course.
 
 ## Some steps to start work:
 ### Gnuplot
-brew install gnuplot
+brew install gnuplot<br>
 gnuplot --version
