@@ -24,3 +24,6 @@ And check gnuplot succesfully installed:
 ```bash
 gnuplot --version
 ```
+
+### 4. Finish:
+Go to "Labs" branch and explore or clone this repo!
