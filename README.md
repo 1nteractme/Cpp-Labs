@@ -1,12 +1,18 @@
-# C++ Labs
-These labs could be useful for c++ university course.
-Plese write me back if u find problems with this repo.
+# C++ Labs  
+These labs could be useful for a C++ university course.  
 
-## Some steps to start work:
-###1. Install CMake
-https://cmake.org/download/
-###2. Install Homebrew
+Please report any issues you find with this repository.
+
+## First steps:
+
+### 1. Install CMake  
+Download and install CMake from the official website:  
+[CMake Download Page](https://cmake.org/download/)
+
+### 2. Install Homebrew  
+Run the following command in your terminal:
+```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-###3. Install Gnuplot
-brew install gnuplot<br>
-gnuplot --version
+```
+
+### 3
