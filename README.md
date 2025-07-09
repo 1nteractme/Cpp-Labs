@@ -3,6 +3,8 @@ These labs could be useful for a C++ university course.
 
 Please report any issues you find with this repository.
 
+**Be careful!** These instructions-set suitable only for MacOS.
+
 ## First steps:
 
 ### 1. Install CMake  
