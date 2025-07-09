@@ -15,4 +15,12 @@ Run the following command in your terminal:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### 3
+### 3. Install Gnuplot
+Run the following command in your terminal:
+```bash
+brew install gnuplot
+```
+And check gnuplot succesfully installed:
+```bash
+gnuplot --version
+```
