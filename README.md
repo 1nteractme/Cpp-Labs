@@ -29,3 +29,16 @@ gnuplot --version
 
 ### 4. Finish:
 Go to "Labs" branch and explore or clone this repo!
+
+### Additional:
+CMakeLists settings
+
+```bash
+cmake_minimum_required(VERSION 3.5)
+project(your_project_name)
+
+set(CMAKE_CXX_STANDARD 26)
+
+add_executable(your_project_name your_file_name.cpp)
+```
+
