@@ -1,14 +1,15 @@
 #include <iostream>
-#include "polynom.cpp"
+#include "complex.cpp"
 
-Polynom inputPolynom(const string &name)
+Complex inputComplex(const string &name)
 {
-    Polynom p;
+    Complex p;
     cout << "Введите коэффициенты для полинома " << name << " (для завершения введите 'q'):" << endl;
 
     while (true)
     {
         double coeff;
+
         cout << "Коэффициент при x^" << p.getSize() << ": ";
         cin >> coeff;
 
@@ -32,8 +33,8 @@ Polynom inputPolynom(const string &name)
 
 int main()
 {
-    Polynom a = inputPolynom("a");
-    Polynom b = inputPolynom("b");
+    const Complex a = inputComplex("a");
+    const Complex b = inputComplex("b");
 
     cout << "Полином 1: ";
     a.print();
@@ -41,19 +42,19 @@ int main()
     cout << "Полином 2: ";
     b.print();
 
-    Polynom sum = a + b;
+    const Complex sum = a + b;
     cout << "Сумма: ";
     sum.print();
 
-    Polynom diff = a - b;
+    const Complex diff = a - b;
     cout << "Разность: ";
     diff.print();
 
-    Polynom prod = a * b;
+    const Complex prod = a * b;
     cout << "Произведение: ";
     prod.print();
 
-    Polynom division = a / b;
+    const Complex division = a / b;
     cout << "Деление: ";
     division.print();
 

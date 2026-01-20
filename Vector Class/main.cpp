@@ -1,140 +1,109 @@
 #include <iostream>
-#include <fstream>
-#include "vect.cpp"
+#include "Vector2D.cpp"
 
-using namespace std;
+void plot_vectors(const Vector2D* v, const size_t n) {
+    FILE* gp = popen("gnuplot -persist", "w");
 
-int main()
-{
-    double xs, xe, ys, ye;
-    int action, sub_action;
+    fprintf(gp, "set grid\n");
+    fprintf(gp, "set size square\n");
+    fprintf(gp, "set title 'Vector visualization'\n");
+    fprintf(gp, "plot '-' with vectors head filled lt 2 lw 2\n");
 
-    cout << "Вектор a" << endl;
-    cout << "Введите начальную координату x: ";
-    cin >> xs;
-    cout << "Введите конечную координату x: ";
-    cin >> xe;
-    cout << "Введите начальную координату y: ";
-    cin >> ys;
-    cout << "Введите конечную координату y: ";
-    cin >> ye;
-    vect a(xs, ys, xe, ye);
+    for (size_t i = 0; i < n; ++i) {
+        fprintf(gp, "%f %f %f %f\n",
+                v[i].xs, v[i].ys,
+                v[i].x(), v[i].y());
+    }
 
-    cout << "\nВектор b" << endl;
-    cout << "Введите начальную координату x: ";
-    cin >> xs;
-    cout << "Введите конечную координату x: ";
-    cin >> xe;
-    cout << "Введите начальную координату y: ";
-    cin >> ys;
-    cout << "Введите конечную координату y: ";
-    cin >> ye;
-    vect b(xs, ys, xe, ye);
+    fprintf(gp, "e\n");
+    fflush(gp);
+    pclose(gp);
+}
 
-    do
-    {
-        cout << "\nВыберите действие:\n"
-             << "1. Посмотреть информацию о векторе\n"
-             << "2. Найти длину вектора\n"
-             << "3. Посчитать сумму векторов\n"
-             << "4. Посчитать разность векторов\n"
-             << "5. Посчитать скалярное произведение\n"
-             << "6. Посчитать угол между векторами\n"
-             << "7. Выход\n"
-             << endl;
+int main() {
+    double xs, ys, xe, ye;
+    int action{}, sub_action{};
 
-        cin >> action;
+    std::cout << "Вектор a\n";
+    std::cout << "Введите xs ys xe ye: ";
+    std::cin >> xs >> ys >> xe >> ye;
+    const Vector2D a(xs, ys, xe, ye);
 
-        switch (action)
-        {
-        case 1:
-            cout << "Вектор:\n1. a\n2. b" << endl;
-            cin >> sub_action;
+    std::cout << "\nВектор b\n";
+    std::cout << "Введите xs ys xe ye: ";
+    std::cin >> xs >> ys >> xe >> ye;
+    const Vector2D b(xs, ys, xe, ye);
 
-            if (sub_action == 1)
-            {
-                cout << "\nИнформация о векторе a:" << endl;
-                a.vinfo();
+    do {
+        std::cout << "\nВыберите действие:\n"
+                  << "1. Информация о векторе\n"
+                  << "2. Длина вектора\n"
+                  << "3. Сумма векторов\n"
+                  << "4. Разность векторов\n"
+                  << "5. Скалярное произведение\n"
+                  << "6. Угол между векторами\n"
+                  << "7. Показать векторы (gnuplot)\n"
+                  << "8. Выход\n> ";
+
+        std::cin >> action;
+
+        switch (action) {
+
+            case 1:
+                std::cout << "1. a\n2. b\n> ";
+                std::cin >> sub_action;
+                (sub_action == 1 ? a : b).print();
+                break;
+
+            case 2:
+                std::cout << "1. a\n2. b\n> ";
+                std::cin >> sub_action;
+                std::cout << "Длина: "
+                          << (sub_action == 1 ? a.length() : b.length())
+                          << '\n';
+                break;
+
+            case 3: {
+                Vector2D sum = a + b;
+                std::cout << "Сумма:\n";
+                sum.print();
+                break;
             }
-            else if (sub_action == 2)
-            {
-                cout << "\nИнформация о векторе b:" << endl;
-                b.vinfo();
+
+            case 4: {
+                Vector2D diff = a - b;
+                std::cout << "Разность:\n";
+                diff.print();
+                break;
             }
-            else
-                cout << "Выбран некорректный вектор!" << endl;
 
-            break;
+            case 5:
+                std::cout << "Скалярное произведение: "
+                          << a.dot(b) << '\n';
+                break;
 
-        case 2:
-            cout << "Вектор:\n1. a\n2. b" << endl;
-            cin >> sub_action;
-
-            if (sub_action == 1)
-            {
-                cout << "\nДлина вектора a:" << endl;
-                a.vdist();
+            case 6: {
+                double angle = Vector2D::angle_rad(a, b);
+                std::cout << "Угол (рад): " << angle << '\n';
+                std::cout << "Угол (град): " << angle * 180.0 / M_PI << '\n';
+                break;
             }
-            else if (sub_action == 2)
-            {
-                cout << "\nДлина вектора b:" << endl;
-                b.vdist();
+
+            case 7: {
+                const Vector2D arr[] = {a, b};
+                plot_vectors(arr, 2);
+                break;
             }
-            else
-                cout << "Выбран некорректный вектор!" << endl;
 
-            break;
+            case 8:
+                std::cout << "Выход.\n";
+                break;
 
-        case 3:
-        {
-            vect sum = a + b;
-            cout << "\nСумма векторов a и b:" << endl;
-            sum.vinfo();
-            sum.vdist();
-            break;
+            default:
+                std::cout << "Неверное действие.\n";
         }
 
-        case 4:
-        {
-            vect diff = a - b;
-            cout << "\nРазность векторов a и b:" << endl;
-            diff.vinfo();
-            diff.vdist();
-            break;
-        }
-
-        case 5:
-        {
-            double scalar;
-
-            cout << "\nВведите скаляр для умножения вектора a: ";
-            cin >> scalar;
-
-            vect scaled = a * scalar;
-            cout << "\nВектор a, умноженный на " << scalar << ":" << endl;
-            scaled.vinfo();
-            scaled.vdist();
-
-            double dot = a.dot_product(b);
-            cout << "\nСкалярное произведение векторов a и b: " << dot << endl;
-            break;
-        }
-
-        case 6:
-            cout << "Вектор между a и b: " << a.vect_angle(a, b) << endl;
-            break;
-
-        case 7:
-        {
-            cout << "Выход из программы." << endl;
-            break;
-        }
-
-        default:
-            cout << "Выбрано неверное действие!" << endl;
-            break;
-        }
-    } while (action != 7);
+    } while (action != 8);
 
     return 0;
 }

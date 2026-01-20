@@ -12,7 +12,7 @@ private:
 public:
     Polynom() : size(0), coefficients(nullptr) {}
 
-    Polynom(size_t n, const double *coeffs) : size(n)
+    Polynom(const size_t n, const double *coeffs) : size(n)
     {
         coefficients = new double[size];
 
@@ -49,8 +49,8 @@ public:
 
     Polynom operator+(const Polynom &other) const
     {
-        size_t maxSize = max(size, other.size);
-        double *resultCoeffs = new double[maxSize]();
+        const size_t maxSize = max(size, other.size);
+        auto *resultCoeffs = new double[maxSize]();
 
         for (size_t i = 0; i < size; ++i)
             resultCoeffs[i] += coefficients[i];
@@ -65,8 +65,8 @@ public:
 
     Polynom operator-(const Polynom &other) const
     {
-        size_t maxSize = max(size, other.size);
-        double *resultCoeffs = new double[maxSize]();
+        const size_t maxSize = max(size, other.size);
+        auto *resultCoeffs = new double[maxSize]();
 
         for (size_t i = 0; i < size; ++i)
             resultCoeffs[i] += coefficients[i];
@@ -81,8 +81,8 @@ public:
 
     Polynom operator*(const Polynom &other) const
     {
-        size_t resultSize = size + other.size - 1;
-        double *resultCoeffs = new double[resultSize]();
+        const size_t resultSize = size + other.size - 1;
+        auto *resultCoeffs = new double[resultSize]();
 
         for (size_t i = 0; i < size; ++i)
         {
@@ -99,25 +99,26 @@ public:
 
     Polynom operator/(const Polynom &other) const
     {
-        size_t dividendSize = size;
-        size_t divisorSize = other.size;
+        const size_t dividendSize = size;
+        const size_t divisorSize = other.size;
 
         if (divisorSize == 0)
         {
             cout << "Деление на нулевой полином!" << endl;
-            return Polynom();
+            return {};
         }
 
         if (dividendSize < divisorSize)
         {
             cout << "Деление на больший полином!" << endl;
-            return Polynom();
+            return {};
         }
 
-        size_t resultSize = dividendSize - divisorSize + 1;
-        double *resultCoeffs = new double[resultSize]();
+        const size_t resultSize = dividendSize - divisorSize + 1;
 
-        double *dividendCoeffs = new double[dividendSize];
+        auto *resultCoeffs = new double[resultSize]();
+        auto *dividendCoeffs = new double[dividendSize];
+
         for (size_t i = 0; i < dividendSize; ++i)
             dividendCoeffs[i] = coefficients[i];
 
@@ -133,7 +134,7 @@ public:
 
         delete[] dividendCoeffs;
 
-        return Polynom(resultSize, resultCoeffs);
+        return {resultSize, resultCoeffs};
     }
 
     void print() const
@@ -153,7 +154,7 @@ public:
 
     void addCoefficient(double coeff)
     {
-        double *newCoeffs = new double[size + 1];
+        auto *newCoeffs = new double[size + 1];
 
         for (size_t i = 0; i < size; ++i)
             newCoeffs[i] = coefficients[i];
@@ -165,12 +166,12 @@ public:
         size++;
     }
 
-    size_t getSize() const
+    [[nodiscard]] size_t getSize() const
     {
         return size;
     }
 
-    double* getCoefficients() const
+    [[nodiscard]] double* getCoefficients() const
     {
         return coefficients;
     }

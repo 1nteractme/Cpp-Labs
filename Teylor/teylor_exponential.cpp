@@ -1,8 +1,9 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
+
 using namespace std;
 
-double CountFact(int n)
+double CountFact(const int n)
 {
     if (n == 0)
         return 1;
@@ -10,7 +11,7 @@ double CountFact(int n)
         return n * CountFact(n - 1);
 }
 
-double Formula(int x, int i)
+double Formula(const int x, const int i)
 {
     return pow(x, i) / CountFact(i);
 }
@@ -19,7 +20,7 @@ int main()
 {
     int x;
     double sum = 0;
-    float q = 0.1;
+    constexpr float q = 0.1;
 
     cout << "Введите x: " << endl;
     cin >> x;

@@ -9,6 +9,7 @@ Polynom inputPolynom(const string &name)
     while (true)
     {
         double coeff;
+
         cout << "Коэффициент при x^" << p.getSize() << ": ";
         cin >> coeff;
 
@@ -32,8 +33,8 @@ Polynom inputPolynom(const string &name)
 
 int main()
 {
-    Polynom a = inputPolynom("a");
-    Polynom b = inputPolynom("b");
+    const Polynom a = inputPolynom("a");
+    const Polynom b = inputPolynom("b");
 
     cout << "Полином 1: ";
     a.print();
@@ -41,19 +42,19 @@ int main()
     cout << "Полином 2: ";
     b.print();
 
-    Polynom sum = a + b;
+    const Polynom sum = a + b;
     cout << "Сумма: ";
     sum.print();
 
-    Polynom diff = a - b;
+    const Polynom diff = a - b;
     cout << "Разность: ";
     diff.print();
 
-    Polynom prod = a * b;
+    const Polynom prod = a * b;
     cout << "Произведение: ";
     prod.print();
 
-    Polynom division = a / b;
+    const Polynom division = a / b;
     cout << "Деление: ";
     division.print();
 
