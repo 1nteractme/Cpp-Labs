@@ -1,11 +1,11 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
-void main()
+int main()
 {
-    int a, b, c;
+    double a, b, c;
 
     cout << "Input the A: " << endl;
     cin >> a;
@@ -16,19 +16,20 @@ void main()
     cout << "Input the C: " << endl;
     cin >> c;
 
-    float d = pow(b, 2) - 4 * a * c;
-
-    if (d > 0)
+    if (const double d = pow(b, 2) - 4 * a * c; d > 0)
     {
-        float k1 = (-1 * b) / 2 * a;
-        float k2 = b / 2 * a;
+        const double k1 = (-1 * b) / 2 * a;
+        const double k2 = b / 2 * a;
+
         cout << "Roots: " << k1 << "," << k2 << endl;
     }
     else if (d == 0)
     {
-        float k = b / 2 * a;
+        const double k = b / 2 * a;
         cout << "Root: " << k << endl;
     }
     else
         cout << "Zero Roots" << endl;
+
+    return 0;
 }

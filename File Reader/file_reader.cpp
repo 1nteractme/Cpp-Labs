@@ -10,24 +10,24 @@ istream &GetLine(istream &ins, string &target)
 {
     target.clear(); 
     char ch = 0;
+
     while (ins.get(ch) && ch != '\n')
-    {
         target += ch;
-    }
+
     return ins;
 }
 
 string FindWord(const string &path)
 {
-    string output, line;
-    ifstream in(path);
+    string output;
 
-    if (in.is_open())
+    if (ifstream in(path); in.is_open())
     {
+        string line;
+
         while (GetLine(in, line)) 
-        {
-            output += line + " "; 
-        }
+            output += line + " ";
+
         in.close();
     }
     else
@@ -36,7 +36,7 @@ string FindWord(const string &path)
     return output;
 }
 
-int (string s)
+int Count(const string& s)
 {
     size_t max(0);
     string maxWord;
@@ -72,7 +72,7 @@ int main()
     cout << "Введите путь до файла: ";
     cin >> path;
 
-    string str = FindWord(path);
+    const string str = FindWord(path);
 
     cout << str << endl; 
 

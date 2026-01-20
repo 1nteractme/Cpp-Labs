@@ -2,25 +2,27 @@
 #include <cmath>
 #include <limits>
 #include <fstream>
+#include <utility>
 #include <vector>
 #include <cstdlib>
+
 using namespace std;
 
-// Визуализацяи с помощью Gnuplot (опиционально)
+/// Визуализацяи с помощью Gnuplot (опиционально) ///
+
 class GnuplotVisualizer
 {
 private:
     string m_gnuplotPath;
 
 public:
-    GnuplotVisualizer(const string &gnuplotPath = "gnuplot") : m_gnuplotPath(gnuplotPath) {}
+    explicit GnuplotVisualizer(string gnuplotPath = "gnuplot") : m_gnuplotPath(std::move(gnuplotPath)) {}
 
-    void visualizeTriangleWithPoint(const vector<pair<float, float>> &trianglePoints, const pair<float, float> &testPoint, bool isInside)
-    {
+    void visualizeTriangleWithPoint(const vector<pair<float, float>> &trianglePoints, const pair<float, float> &testPoint, bool isInside) const {
         ofstream dataFile("triangle_data.dat");
 
-        for (const auto &point : trianglePoints)
-            dataFile << point.first << " " << point.second << "\n";
+        for (const auto &[fst, snd] : trianglePoints)
+            dataFile << fst << " " << snd << "\n";
 
         dataFile << trianglePoints[0].first << " " << trianglePoints[0].second << "\n";
 
@@ -52,25 +54,31 @@ public:
     }
 };
 
-// Расстояние между двумя точками
-float calculateDistance(float x1, float y1, float x2, float y2)
+///
+/// @return DISTANCE BETWEEN 2 POINTS
+double calculateDistance(const double x1, const double y1, const double x2, const double y2)
 {
-    float dx = x1 - x2;
-    float dy = y1 - y2;
+    const auto dx = x1 - x2;
+    const auto dy = y1 - y2;
+
     return sqrt(dx * dx + dy * dy);
 }
 
-// формула Герона
-float calculateTriangleArea(float a, float b, float c)
+///
+/// @return GERONE METHODE
+double calculateTriangleArea(const double a, const double b, const double c)
 {
-    float p = (a + b + c) / 2;
+    const auto p = (a + b + c) / 2;
+
     return sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
-// Ввода координат точки с проверкой
+///
+/// @fun INPUT COORDINATES
 void inputPointCoordinates(const string &pointName, float &x, float &y)
 {
     cout << "Введите координаты для точки " << pointName << " (x y): ";
+
     while (!(cin >> x >> y))
     {
         cout << "Ошибка ввода! Пожалуйста, введите два числа: ";
@@ -87,34 +95,35 @@ int main()
     inputPointCoordinates("3", x3, y3);
     inputPointCoordinates("4", x4, y4);
 
-    float a = calculateDistance(x1, y1, x2, y2);
-    float b = calculateDistance(x2, y2, x3, y3);
-    float c = calculateDistance(x3, y3, x1, y1);
+    const double a = calculateDistance(x1, y1, x2, y2);
+    const double b = calculateDistance(x2, y2, x3, y3);
+    const double c = calculateDistance(x3, y3, x1, y1);
 
-    float d1 = calculateDistance(x1, y1, x4, y4);
-    float d2 = calculateDistance(x2, y2, x4, y4);
-    float d3 = calculateDistance(x3, y3, x4, y4);
+    const double d1 = calculateDistance(x1, y1, x4, y4);
+    const double d2 = calculateDistance(x2, y2, x4, y4);
+    const double d3 = calculateDistance(x3, y3, x4, y4);
 
-    float mainArea = calculateTriangleArea(a, b, c);
-    float area1 = calculateTriangleArea(a, d1, d2);
-    float area2 = calculateTriangleArea(b, d2, d3);
-    float area3 = calculateTriangleArea(c, d1, d3);
+    const double mainArea = calculateTriangleArea(a, b, c);
+    const double area1 = calculateTriangleArea(a, d1, d2);
+    const double area2 = calculateTriangleArea(b, d2, d3);
+    const double area3 = calculateTriangleArea(c, d1, d3);
 
-    float sumAreas = area1 + area2 + area3;
+    const double sumAreas = area1 + area2 + area3;
 
-    const float epsilon = 0.001f;
-    bool isInside = abs(mainArea - sumAreas) < epsilon;
+    constexpr double epsilon = 0.001f;
+    const bool isInside = abs(mainArea - sumAreas) < epsilon;
 
     cout << "Точка с координатами (" << x4 << "; " << y4 << ") ";
+
     if (isInside)
         cout << "лежит внутри треугольника." << endl;
     else
         cout << "лежит вне треугольника." << endl;
 
-    // Визуализация
-    GnuplotVisualizer visualizer;
-    vector<pair<float, float>> trianglePoints = {{x1, y1}, {x2, y2}, {x3, y3}};
-    pair<float, float> testPoint = {x4, y4};
+    // VISUALIZATION
+    const GnuplotVisualizer visualizer;
+    const vector<pair<float, float>> trianglePoints = {{x1, y1}, {x2, y2}, {x3, y3}};
+    const pair<float, float> testPoint = {x4, y4};
 
     cout << "\nЗапуск визуализации... (должно открыться окно Gnuplot)" << endl;
     visualizer.visualizeTriangleWithPoint(trianglePoints, testPoint, isInside);

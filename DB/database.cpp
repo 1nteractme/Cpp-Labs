@@ -4,52 +4,44 @@
 
 using namespace std;
 
-struct NOTE
-{
+struct NOTE {
     string name, surname, phone_number;
-    int birthDate[3];
+    int birthDate[3]{};
 };
 
 bool Compare(const NOTE &a, const NOTE &b) {
     return a.phone_number.substr(0, 3) < b.phone_number.substr(0, 3);
 }
 
-void FindData(int notesCount, NOTE *notes)
-{
+void FindData(const int notesCount, const NOTE *notes) {
     string searchSurname;
     bool isFound = false;
 
     cout << "Введите фамилию для поиска: " << endl;
     cin >> searchSurname;
 
-    for (int i = 0; i < notesCount; ++i)
-    {
-        const NOTE &note = notes[i];
-        if (note.surname == searchSurname)
-        {
+    for (int i = 0; i < notesCount; ++i) {
+        if (const auto &[name, surname, phone_number, birthDate] = notes[i]; surname == searchSurname) {
             isFound = true;
 
-            cout << "Фамилия: " << note.surname << endl;
-            cout << "Имя: " << note.name << endl;
-            cout << "Телефон: " << note.phone_number << endl;
-            cout << "Дата рождения: " << note.birthDate[0] << "."
-                 << note.birthDate[1] << "."
-                 << note.birthDate[2] << endl;
+            cout << "Фамилия: " << surname << endl;
+            cout << "Имя: " << name << endl;
+            cout << "Телефон: " << phone_number << endl;
+            cout << "Дата рождения: " << birthDate[0] << "."
+                    << birthDate[1] << "."
+                    << birthDate[2] << endl;
 
             break;
         }
     }
 
-    if (!isFound)
-    {
+    if (!isFound) {
         cout << "Запись с такой фамилией не найдена!" << endl;
     }
 }
 
-void FillDatabase(int notesCount, NOTE *notes)
-{
-    for (int i = 0; i < notesCount; i++)
-    {
+void FillDatabase(const int notesCount, NOTE *notes) {
+    for (int i = 0; i < notesCount; i++) {
         cout << "Запись №" << i + 1 << endl;
         cout << "Введите фамилию: ";
         cin >> notes[i].surname;
@@ -65,16 +57,14 @@ void FillDatabase(int notesCount, NOTE *notes)
     }
 }
 
-void UI(int notesCount, NOTE *notes)
-{
+void UI(const int notesCount, NOTE *notes) {
     int action;
-    
+
     do {
         cout << "Действия:\n1. Заполнить БД\n2. Найти запись\n3. Отсортировать\n4. Выход" << endl;
         cin >> action;
 
-        switch (action)
-        {
+        switch (action) {
             case 1:
                 FillDatabase(notesCount, notes);
                 break;
@@ -94,14 +84,13 @@ void UI(int notesCount, NOTE *notes)
     } while (action != 4);
 }
 
-int main()
-{
+int main() {
     int notesCount;
 
     cout << "Введите размер БД: ";
     cin >> notesCount;
 
-    NOTE *notes = new NOTE[notesCount];
+    const auto notes = new NOTE[notesCount];
 
     UI(notesCount, notes);
 

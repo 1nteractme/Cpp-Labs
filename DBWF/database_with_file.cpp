@@ -13,8 +13,7 @@ struct User
 
 void SaveToFile(const User &bd)
 {
-    ofstream out("database.txt", ios::app);
-    if (out.is_open())
+    if (ofstream out("database.txt", ios::app); out.is_open())
     {
         out << bd.name << " "
             << bd.email << " "
@@ -26,7 +25,7 @@ void SaveToFile(const User &bd)
         cout << "Ошибка при открытии файла!" << endl;
 }
 
-void FindData(string out, string action)
+void FindData(const string& out, const string& action)
 {
     string search;
     bool isFound = false;
@@ -34,8 +33,7 @@ void FindData(string out, string action)
     cout << "Введите " << out << " для поиска: " << endl;
     cin >> search;
 
-    ifstream in("database.txt");
-    if (in.is_open())
+    if (ifstream in("database.txt"); in.is_open())
     {
         string line;
         while (getline(in, line))
