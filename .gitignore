@@ -2,38 +2,16 @@
 *.exe
 *.out
 *.o
-*.obj
-*.so
-*.dll
-
-# Файлы сборки
-build/
-dist/
-*.sln
-*.vcxproj*
-*.vcproj
-CMakeFiles/
-cmake-build-*/
-Makefile
-
-# IDE файлы
-.vscode/
-.vs/
-.idea/
-*.iml
-*.code-workspace
-*.gitignore
 
 # Временные файлы
-*.log
-*.tmp
-*.swp
-*.swo
-*~
-
-# Файлы данных и скрипты
 *.dat
 *.gp
 *.txt
+.DS_Store
 
-!README.md
+# Документация
+README.md
+*.md
+
+# IDE
+.idea/
