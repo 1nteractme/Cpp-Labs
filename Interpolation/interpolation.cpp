@@ -164,7 +164,7 @@ int main() {
     // polynomial_coeffs(arr, nodes);
     // check_interpolation(arr, nodes, x, y);
 
-    set_data("interpolation_data.txt", x, y, nodes, arr);
+    set_data("interpolation_data.dat", x, y, nodes, arr);
 
     for (int i = 0; i < nodes; i++)
         delete[] A[i];

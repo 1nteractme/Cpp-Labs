@@ -22,6 +22,7 @@ Makefile
 .idea/
 *.iml
 *.code-workspace
+*.gitignore
 
 # Временные файлы
 *.log
