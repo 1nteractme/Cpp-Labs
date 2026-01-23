@@ -1,0 +1,38 @@
+# Бинарные файлы
+*.exe
+*.out
+*.o
+*.obj
+*.so
+*.dll
+
+# Файлы сборки
+build/
+dist/
+*.sln
+*.vcxproj*
+*.vcproj
+CMakeFiles/
+cmake-build-*/
+Makefile
+
+# IDE файлы
+.vscode/
+.vs/
+.idea/
+*.iml
+*.code-workspace
+
+# Временные файлы
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+
+# Файлы данных и скрипты
+*.dat
+*.gp
+*.txt
+
+!README.md

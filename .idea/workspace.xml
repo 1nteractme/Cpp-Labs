@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/Environment/Hierarchy/GeneratedFilesCacheKey/Timestamp/@EntryValue" value="3" type="long" />
+    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
+    <option name="/Default/Housekeeping/LiveTemplatesHousekeeping/HotspotSessionHintIsShown/@EntryValue" value="true" type="bool" />
+  </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c8fd89ac-789c-4505-9f6a-72c3c1705e1a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hemisphere/hemisphere" beforeDir="false" afterPath="$PROJECT_DIR$/Hemisphere/hemisphere" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interpolation/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interpolation/interpolation" beforeDir="false" afterPath="$PROJECT_DIR$/Interpolation/interpolation" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LSM/least_squares_method" beforeDir="false" afterPath="$PROJECT_DIR$/LSM/least_squares_method" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LSM/least_squares_method.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LSM/least_squares_method.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lagrange/lagrange" beforeDir="false" afterPath="$PROJECT_DIR$/Lagrange/lagrange" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lagrange/lagrange.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Lagrange/lagrange.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewtonGnuplot/interpolation_data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/NewtonGnuplot/interpolation_data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewtonGnuplot/newton" beforeDir="false" afterPath="$PROJECT_DIR$/NewtonGnuplot/newton" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NewtonGnuplot/newton.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/NewtonGnuplot/newton.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Labs" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;1nteractme&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/1nteractme/Cpp-Labs.git&quot;,
+    &quot;accountId&quot;: &quot;67289d58-8ef8-4b17-957e-06c21952ccf3&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Gauss/gauss.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Hemisphere/hemisphere.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Interpolation/interpolation.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/LSM/least_squares_method.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Lagrange/lagrange.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/NewtonGnuplot/newton.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/NewtonGnuplot/show_plot.gp" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="VLBjlTvX" />
+  </component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="300" />
+    </hideBySeverity>
+    <option name="showPreview" value="true" />
+    <option name="sortBySeverity" value="false" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="38X6nTKwAKV9UpWl2KxAiijBuq6" />
+  <component name="ProjectStatusUIService">{
+  &quot;uiKindId&quot;: &quot;Widget&quot;
+}</component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C/C++ File.gauss.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.hemisphere.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.interpolation.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.lagrange.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.least_squares_method.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.main.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;C/C++ File.newton.cpp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;semester-3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;repository&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Hemisphere" />
+      <recent name="$PROJECT_DIR$/Newton" />
+    </key>
+  </component>
+  <component name="RunManager" selected="C/C++ File.lagrange.cpp">
+    <configuration name="gauss.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="gauss.cpp" CONFIG_NAME="gauss.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="Gauss/gauss.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="hemisphere.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="hemisphere.cpp" CONFIG_NAME="hemisphere.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="Hemisphere/hemisphere.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="interpolation.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="interpolation.cpp" CONFIG_NAME="interpolation.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="Interpolation/interpolation.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lagrange.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="lagrange.cpp" CONFIG_NAME="lagrange.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="Lagrange/lagrange.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="least_squares_method.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="least_squares_method.cpp" CONFIG_NAME="least_squares_method.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="LSM/least_squares_method.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="main.cpp" CONFIG_NAME="main.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="NewtonGnuplot/main.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="newton.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Cpp-Labs" TARGET_NAME="newton.cpp" CONFIG_NAME="newton.cpp">
+      <option name="compilerOptions" value="-std=c++26" />
+      <option name="sourceFile" value="NewtonGnuplot/newton.cpp" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.runfile.CppFileBuildBeforeRunTaskProvider$BasicBuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="C/C++ File.least_squares_method.cpp" />
+      <item itemvalue="C/C++ File.lagrange.cpp" />
+      <item itemvalue="C/C++ File.interpolation.cpp" />
+      <item itemvalue="C/C++ File.newton.cpp" />
+      <item itemvalue="C/C++ File.gauss.cpp" />
+      <item itemvalue="C/C++ File.hemisphere.cpp" />
+      <item itemvalue="C/C++ File.main.cpp" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8fd89ac-789c-4505-9f6a-72c3c1705e1a" name="Changes" comment="" />
+      <created>1768933735147</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768933735147</updated>
+      <workItem from="1768933736386" duration="10796000" />
+      <workItem from="1768988882950" duration="14262000" />
+      <workItem from="1769019166667" duration="3519000" />
+      <workItem from="1769193935524" duration="9618000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
