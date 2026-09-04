@@ -1,0 +1,45 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+bin/
+Debug/
+Release/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+install_manifest.txt
+Makefile
+CTestTestfile.cmake
+
+# Compiled files
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# IDE
+.idea/
+.vscode/
+*.user
+*.suo
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+
+# Temporary files
+*.tmp
+*.log
