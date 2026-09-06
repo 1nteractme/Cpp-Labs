@@ -144,7 +144,6 @@ public:
         return result;
     }
 
-
     /// НЕЯВНЫЙ ЭЙЛЕР
     /*
      * yn+1 = yn + h*f(xn+1, yn+1)

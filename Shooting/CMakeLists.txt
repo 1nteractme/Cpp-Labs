@@ -1,0 +1,1 @@
+add_executable(Shooting main.cpp)
