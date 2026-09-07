@@ -1,0 +1,1 @@
+add_executable(Cramer main.cpp)
