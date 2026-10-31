@@ -1,0 +1,1 @@
+add_executable(least_squares_method least_squares_method.cpp)

@@ -1,0 +1,10 @@
+cmake-build-*/
+.idea/
+
+# Compiled binaries
+Gauss/gauss
+Hemisphere/hemisphere
+Interpolation/interpolation
+LSM/least_squares_method
+Lagrange/lagrange
+NewtonGnuplot/newton
