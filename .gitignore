@@ -1,0 +1,11 @@
+cmake-build-*/
+.idea/
+
+# Compiled binaries
+DB/database
+DBWF/database_with_file
+File Reader/file_reader
+Matrix/matrix
+Registration/user_reg
+Square Roots/square_roots
+Triangle Points/triangle_points

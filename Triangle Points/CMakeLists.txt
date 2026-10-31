@@ -1,0 +1,1 @@
+add_executable(triangle_points triangle_points.cpp)
