@@ -1,0 +1,7 @@
+cmake-build-*/
+.idea/
+
+# Compiled binaries
+Complex Class/main
+Teylor/teylor_exponential
+Vector Class/main
