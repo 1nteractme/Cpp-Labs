@@ -17,9 +17,9 @@ public:
 
     /// Умножение матриц
     /// @brief Перемножает две матрицы
-    /// @param first первая матрица
-    /// @param second вторая матрица
-    /// @return результат умножения
+    /// @param first Первая матрица
+    /// @param second Вторая матрица
+    /// @return Результат умножения
     friend Matrix operator*(const Matrix& first, const Matrix& second)
     {
         if (first.empty() || second.empty() || first[0].size() != second.size())
@@ -44,7 +44,7 @@ private:
 
     /// Единичная матрица
     /// @brief Создает единичную матрицу размерности n
-    /// @param n размер матрицы
+    /// @param n Размер матрицы
     /// @return Единичную матрицу указанного размера
     static Matrix identify(const size_t n)
     {
@@ -58,9 +58,9 @@ private:
 
     /// Знаменатель
     /// @brief Возвращает опорный элемент матрицы
-    /// @param index индекс строки опорного элемента
-    /// @param M текущая матрица
-    /// @return опорный элемент
+    /// @param index Индекс строки опорного элемента
+    /// @param M Текущая матрица
+    /// @return Опорный элемент
     static double Denominator(const size_t index, const Matrix& M)
     {
         return M[index][index - 1];
@@ -68,9 +68,9 @@ private:
 
     /// Матрица преобразования
     /// @brief Формирует матрицу M для текущего шага
-    /// @param index номер текущего шага
-    /// @param M текущая матрица
-    /// @return матрица преобразования
+    /// @param index Номер текущего шага
+    /// @param M Текущая матрица
+    /// @return Матрица преобразования
     [[nodiscard]] Matrix M(const size_t index, const Matrix& M) const
     {
         Matrix result = identify(M.size());
@@ -90,8 +90,8 @@ private:
 
     /// Обратная матрица
     /// @brief Вычисляет обратную матрицу методом Гаусса
-    /// @param M исходная матрица
-    /// @return обратная матрица
+    /// @param M Исходная матрица
+    /// @return Обратная матрица
     [[nodiscard]] Matrix M_Inversed(Matrix M) const
     {
         const size_t n = M.size();
@@ -137,74 +137,9 @@ private:
         return result;
     }
 
-    /// Печать матрицы
-    /// @brief Выводит матрицу в консоль
-    /// @param M матрица для вывода
-    /// @param index
-    static void printMatrix(const Matrix& M, const size_t index)
-    {
-        cout << '\n'
-            << (index != 0 ? "Итерация k = " + to_string(index) + "\n" : "");
-        // << "Матрица преобразования M_k:\n";
-
-        Table table;
-
-        for (const auto& row : M)
-        {
-            Table::Row_t _row;
-
-            for (const auto value : row)
-                _row.emplace_back(fmt::format("{:10.2f}", value));
-
-            table.add_row(_row);
-        }
-
-        table.format().font_align(FontAlign::right);
-        // table.use_unicode_borders(true, BorderStyle::Light);
-        cout << table << endl;
-    }
-
-    /// Печать характеристического полинома
-    /// @brief Выводит полином в консоль с помощью UNICODE-символов
-    /// @param current матрица для вывода
-    void printPolynomial(const Matrix& current) const
-    {
-        const size_t n = current.size();
-
-        cout << "\n"
-            << "Характеристический многочлен:\n"
-            << "P(λ) = λ" << toSuperscript(n);
-
-        for (size_t i = 0; i < n; ++i)
-        {
-            const double coefficient = current[0][i];
-            const size_t power = n - i - 1;
-
-            if (abs(coefficient) < eps_)
-                continue;
-
-            const double absCoefficient = abs(coefficient);
-
-            cout << (coefficient < 0 ? " - " : " + ");
-
-            if (absCoefficient != 1.0 || power == 0)
-                cout << absCoefficient;
-
-            if (power > 0)
-            {
-                cout << "λ";
-
-                if (power > 1)
-                    cout << toSuperscript(power);
-            }
-        }
-
-        cout << '\n';
-    }
-
     /// Степень
     /// @brief Преобразует число в вид UNICODE-символа
-    /// @param number текущая степень полинома
+    /// @param number Текущая степень полинома
     static string toSuperscript(size_t number)
     {
         constexpr const char* digits[] = {"⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"};
@@ -223,10 +158,92 @@ private:
         return result;
     }
 
+    /// Печать матрицы
+    /// @brief Выводит матрицу в консоль
+    /// @param M Матрица для вывода
+    /// @param index
+    static void printMatrix(const Matrix& M, const size_t index)
+    {
+        cout << '\n'
+            << (index != 0 ? "Итерация k = " + to_string(index) + "\n" : "");
+        // << "Матрица преобразования M_k:\n";
+
+        Table table;
+
+        for (const auto& row : M)
+        {
+            Table::Row_t _row;
+
+            for (const auto value : row)
+            {
+                // if (abs(value) == 1 || abs(value) == 0)
+                //     _row.emplace_back(fmt::format("{:10.0f}", value));
+
+                _row.emplace_back(fmt::format("{:10.2f}", value));
+            }
+
+            table.add_row(_row);
+        }
+
+        table.format().font_align(FontAlign::right);
+        // table.use_unicode_borders(true, BorderStyle::Light);
+        cout << table << endl;
+    }
+
+    /// Печать характеристического полинома
+    /// @brief Выводит полином в консоль с помощью UNICODE-символов
+    /// @param current Матрица для вывода
+    void printPolynomial(const Matrix& current) const
+    {
+        const size_t n = current.size();
+
+        cout << "\n"
+            << "Характеристический многочлен:\n"
+            << "P(λ) = λ" << toSuperscript(n);
+
+        for (size_t i = 0; i < n; ++i)
+        {
+            const double coefficient = current[0][i];
+            const size_t power = n - i - 1;
+
+            if (abs(coefficient) < eps_)
+                continue;
+
+            const double absCoefficient = abs(coefficient);
+
+            cout << (coefficient < 0 ? " + " : " - ");
+
+            if (absCoefficient != 1.0 || power == 0)
+                cout << absCoefficient;
+
+            if (power > 0)
+            {
+                cout << "λ";
+
+                if (power > 1)
+                    cout << toSuperscript(power);
+            }
+        }
+
+        cout << '\n';
+    }
+
 public:
+
+    /// Вывод решения
+    /// @brief Выводит решение матрицы Фробениуса и характеристический многочлен
+    /// @param S Результирующая матрица
+    void print(const Matrix& S) const
+    {
+        cout << "\nМатрица Фробениуса:";
+
+        printMatrix(S, 0);
+        printPolynomial(S);
+    }
+
     /// Конструктор класса
     /// @brief Сохраняет и проверяет исходную матрицу
-    /// @param matrix исходная матрица
+    /// @param matrix Исходная матрица
     /// @param eps
     explicit Danilevskiy(Matrix matrix, const long double eps) : A(std::move(matrix)), eps_(eps)
     {
@@ -240,18 +257,18 @@ public:
 
     /// Метод Данилевского
     /// @brief Приводит матрицу к форме Фробениуса
-    /// @return матрица Фробениуса
-    void solve() const
+    /// @return Матрица Фробениуса
+    [[nodiscard]] Matrix S() const
     {
         Matrix A_ = A;
         Matrix S = A_;
 
         if (A_.size() == 1)
         {
-            cout << "\nМатрица Фробениуса:";
-            printMatrix(S, 0);
-            printPolynomial(S);
-            return;
+            // cout << "\nМатрица Фробениуса:";
+            // printMatrix(S, 0);
+            // printPolynomial(S);
+            return S;
         }
 
         for (size_t index = A_.size(); (index--) > 1;)
@@ -287,12 +304,9 @@ public:
             S = M_Inversed_ * A_ * M_;
             A_ = S;
 
-            printMatrix(M_, index);
+            // printMatrix(M_, index);
         }
 
-        cout << "\nМатрица Фробениуса:";
-        printMatrix(S, 0);
-
-        printPolynomial(S);
+        return S;
     }
 };

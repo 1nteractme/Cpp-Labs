@@ -14,7 +14,8 @@ int main(){
     try{
         constexpr double EPS = 1e-12;
         const Danilevskiy METHOD(A, EPS);
-        METHOD.solve();
+
+        METHOD.print(METHOD.S());
     }
     catch(const exception& error){
         cerr << "Ошибка: " << error.what() << '\n';
