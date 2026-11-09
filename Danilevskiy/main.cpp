@@ -1,24 +1,38 @@
-#include <iostream>
 #include "Danilevskiy.hpp"
+#include "PolynomialMethods.hpp"
 
-using namespace std;
+#include <iostream>
 
-int main(){
+int main()
+{
     const Matrix A = {
-            {1, 2, 3, 4},
-            {2, 1, 2, 3},
-            {3, 2, 1, 2},
-            {4, 3, 2, 1}
+        {1, 2, 3, 4},
+        {2, 1, 2, 3},
+        {3, 2, 1, 2},
+        {4, 3, 2, 1}
     };
 
-    try{
-        constexpr double EPS = 1e-12;
-        const Danilevskiy METHOD(A, EPS);
+    constexpr double EPS           = 1e-12;
+    constexpr double START         = -10.0;
+    constexpr double END           =  10.0;
+    constexpr size_t COUNT         = 1001;
+    constexpr size_t MAX_ITER      = 100;
 
-        METHOD.print(METHOD.S());
+    try
+    {
+        const Danilevskiy method(A, EPS);
+        method.printMatrix();
+
+        const PolynomialMethods pm(
+            method.characteristicPolynomial(),
+            START, END, COUNT, EPS, MAX_ITER);
+
+        pm.printPolynomial();
+        pm.printRoots();
     }
-    catch(const exception& error){
-        cerr << "Ошибка: " << error.what() << '\n';
+    catch (const exception& e)
+    {
+        cerr << "Ошибка: " << e.what() << '\n';
         return 1;
     }
 

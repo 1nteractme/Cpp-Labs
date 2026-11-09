@@ -1,134 +1,139 @@
 #pragma once
 
-#include <iostream>
-#include <stdexcept>
-#include <utility>
-#include <vector>
-#include <tabulate/table.hpp>
+#include "Matrix.hpp"
+#include "Polynomial.hpp"
+
 #include <fmt/format.h>
+#include <tabulate/table.hpp>
+#include <utility>
 
-using namespace std;
 using namespace tabulate;
-
-class Matrix : public vector<vector<double>>
-{
-public:
-    using vector::vector;
-
-    /// Умножение матриц
-    /// @brief Перемножает две матрицы
-    /// @param first Первая матрица
-    /// @param second Вторая матрица
-    /// @return Результат умножения
-    friend Matrix operator*(const Matrix& first, const Matrix& second)
-    {
-        if (first.empty() || second.empty() || first[0].size() != second.size())
-            throw invalid_argument("Размеры матриц не подходят для умножения");
-
-        Matrix result(first.size(), vector<double>(second[0].size(), 0));
-
-        for (size_t i = 0; i < first.size(); ++i)
-            for (size_t j = 0; j < second[0].size(); ++j)
-                for (size_t k = 0; k < second.size(); ++k)
-                    result[i][j] += first[i][k] * second[k][j];
-
-        return result;
-    }
-};
 
 class Danilevskiy
 {
-private:
-    Matrix A;
-    const long double eps_;
-
-    /// Единичная матрица
-    /// @brief Создает единичную матрицу размерности n
-    /// @param n Размер матрицы
-    /// @return Единичную матрицу указанного размера
-    static Matrix identify(const size_t n)
+public:
+    explicit Danilevskiy(Matrix matrix, const double eps) : A_(std::move(matrix)), eps_(eps)
     {
-        Matrix E(n, vector<double>(n, 0));
+        if (A_.empty())
+            throw invalid_argument("Матрица не должна быть пустой");
+
+        for (const auto& row : A_)
+            if (row.size() != A_.size())
+                throw invalid_argument("Матрица должна быть квадратной");
+
+        frobenius_ = computeFrobenius();
+    }
+
+    /// Матрица Фробениуса
+    [[nodiscard]] const Matrix& frobenius() const { return frobenius_; }
+
+    /// Характеристический полином по первой строке матрицы Фробениуса
+    [[nodiscard]] Polynomial characteristicPolynomial() const
+    {
+        const size_t n = frobenius_.size();
+        Polynomial p;
+        p.reserve(n + 1);
+        p.push_back(1.0);
+
+        for (const double c : frobenius_[0])
+            p.push_back(-c);
+
+        return p;
+    }
+
+    void printMatrix() const
+    {
+        cout << "\nМатрица Фробениуса:\n";
+
+        Table table;
+
+        for (const auto& row : frobenius_)
+        {
+            Table::Row_t r;
+
+            for (const double value : row)
+                r.emplace_back(fmt::format("{:10.2f}", value));
+
+            table.add_row(r);
+        }
+
+        table.format().font_align(FontAlign::right);
+        cout << table << '\n';
+    }
+
+private:
+    Matrix A_;
+    double eps_;
+    Matrix frobenius_;
+
+    static Matrix identity(const size_t n)
+    {
+        Matrix E(n, vector<double>(n, 0.0));
 
         for (size_t i = 0; i < n; ++i)
-            E[i][i] = 1;
+            E[i][i] = 1.0;
 
         return E;
     }
 
-    /// Знаменатель
-    /// @brief Возвращает опорный элемент матрицы
-    /// @param index Индекс строки опорного элемента
-    /// @param M Текущая матрица
-    /// @return Опорный элемент
-    static double Denominator(const size_t index, const Matrix& M)
+    static double pivot(const size_t index, const Matrix& m)
     {
-        return M[index][index - 1];
+        return m[index][index - 1];
     }
 
-    /// Матрица преобразования
-    /// @brief Формирует матрицу M для текущего шага
-    /// @param index Номер текущего шага
-    /// @param M Текущая матрица
-    /// @return Матрица преобразования
-    [[nodiscard]] Matrix M(const size_t index, const Matrix& M) const
+    [[nodiscard]] Matrix buildTransform(const size_t index, const Matrix& m) const
     {
-        Matrix result = identify(M.size());
-        const double denominator = Denominator(index, M);
+        Matrix result = identity(m.size());
+        const double p = pivot(index, m);
 
-        if (abs(denominator) < eps_)
+        if (abs(p) < eps_)
             throw runtime_error("Опорный элемент близок к нулю");
 
-        for (size_t i = 0; i < M.size(); ++i)
+        for (size_t i = 0; i < m.size(); ++i)
         {
-            const bool isValid = i == index - 1;
-            result[index - 1][i] = isValid ? 1 / denominator : -M[index][i] / denominator;
+            const bool isDiag = (i == index - 1);
+            result[index - 1][i] = isDiag ? 1.0 / p : -m[index][i] / p;
         }
 
         return result;
     }
 
-    /// Обратная матрица
-    /// @brief Вычисляет обратную матрицу методом Гаусса
-    /// @param M Исходная матрица
-    /// @return Обратная матрица
-    [[nodiscard]] Matrix M_Inversed(Matrix M) const
+    [[nodiscard]] Matrix invertMatrix(Matrix m) const
     {
-        const size_t n = M.size();
-        Matrix result = identify(n);
+        const size_t n = m.size();
+        Matrix result = identity(n);
 
-        for (int i = 0; i < n; ++i)
+        for (size_t i = 0; i < n; ++i)
         {
-            int pivot = i;
+            size_t pivotRow = i;
 
-            for (int j = i + 1; j < n; ++j)
-                if (abs(M[j][i]) > abs(M[pivot][i]))
-                    pivot = j;
+            for (size_t j = i + 1; j < n; ++j)
+                if (abs(m[j][i]) > abs(m[pivotRow][i]))
+                    pivotRow = j;
 
-            if (abs(M[pivot][i]) < eps_)
+            if (abs(m[pivotRow][i]) < eps_)
                 throw runtime_error("Матрица необратима");
 
-            swap(M[i], M[pivot]);
-            swap(result[i], result[pivot]);
+            swap(m[i], m[pivotRow]);
+            swap(result[i], result[pivotRow]);
 
-            const double divisor = M[i][i];
+            const double divisor = m[i][i];
 
-            for (int j = 0; j < n; ++j)
+            for (size_t j = 0; j < n; ++j)
             {
-                M[i][j] /= divisor;
+                m[i][j]      /= divisor;
                 result[i][j] /= divisor;
             }
 
-            for (int j = 0; j < n; ++j)
+            for (size_t j = 0; j < n; ++j)
             {
-                if (j == i)
-                    continue;
+                if (j == i) continue;
 
-                const double factor = M[j][i];
+                const double factor = m[j][i];
 
-                for (int k = 0; k < n; ++k)
+                for (size_t k = 0; k < n; ++k)
                 {
-                    M[j][k] -= factor * M[i][k];
+                    m[j][k]      -= factor * m[i][k];
                     result[j][k] -= factor * result[i][k];
                 }
             }
@@ -137,176 +142,46 @@ private:
         return result;
     }
 
-    /// Степень
-    /// @brief Преобразует число в вид UNICODE-символа
-    /// @param number Текущая степень полинома
-    static string toSuperscript(size_t number)
+    [[nodiscard]] Matrix computeFrobenius() const
     {
-        constexpr const char* digits[] = {"⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"};
+        Matrix cur = A_;
 
-        if (number == 0)
-            return digits[0];
+        if (cur.size() == 1)
+            return cur;
 
-        string result;
-
-        while (number > 0)
+        for (size_t index = cur.size(); (index--) > 1;)
         {
-            result += digits[number % 10];
-            number /= 10;
-        }
-
-        return result;
-    }
-
-    /// Печать матрицы
-    /// @brief Выводит матрицу в консоль
-    /// @param M Матрица для вывода
-    /// @param index
-    static void printMatrix(const Matrix& M, const size_t index)
-    {
-        cout << '\n'
-            << (index != 0 ? "Итерация k = " + to_string(index) + "\n" : "");
-        // << "Матрица преобразования M_k:\n";
-
-        Table table;
-
-        for (const auto& row : M)
-        {
-            Table::Row_t _row;
-
-            for (const auto value : row)
+            if (abs(pivot(index, cur)) < eps_)
             {
-                // if (abs(value) == 1 || abs(value) == 0)
-                //     _row.emplace_back(fmt::format("{:10.0f}", value));
+                size_t swapRow = cur.size();
 
-                _row.emplace_back(fmt::format("{:10.2f}", value));
-            }
-
-            table.add_row(_row);
-        }
-
-        table.format().font_align(FontAlign::right);
-        // table.use_unicode_borders(true, BorderStyle::Light);
-        cout << table << endl;
-    }
-
-    /// Печать характеристического полинома
-    /// @brief Выводит полином в консоль с помощью UNICODE-символов
-    /// @param current Матрица для вывода
-    void printPolynomial(const Matrix& current) const
-    {
-        const size_t n = current.size();
-
-        cout << "\n"
-            << "Характеристический многочлен:\n"
-            << "P(λ) = λ" << toSuperscript(n);
-
-        for (size_t i = 0; i < n; ++i)
-        {
-            const double coefficient = current[0][i];
-            const size_t power = n - i - 1;
-
-            if (abs(coefficient) < eps_)
-                continue;
-
-            const double absCoefficient = abs(coefficient);
-
-            cout << (coefficient < 0 ? " + " : " - ");
-
-            if (absCoefficient != 1.0 || power == 0)
-                cout << absCoefficient;
-
-            if (power > 0)
-            {
-                cout << "λ";
-
-                if (power > 1)
-                    cout << toSuperscript(power);
-            }
-        }
-
-        cout << '\n';
-    }
-
-public:
-
-    /// Вывод решения
-    /// @brief Выводит решение матрицы Фробениуса и характеристический многочлен
-    /// @param S Результирующая матрица
-    void print(const Matrix& S) const
-    {
-        cout << "\nМатрица Фробениуса:";
-
-        printMatrix(S, 0);
-        printPolynomial(S);
-    }
-
-    /// Конструктор класса
-    /// @brief Сохраняет и проверяет исходную матрицу
-    /// @param matrix Исходная матрица
-    /// @param eps
-    explicit Danilevskiy(Matrix matrix, const long double eps) : A(std::move(matrix)), eps_(eps)
-    {
-        if (A.empty())
-            throw invalid_argument("Матрица не должна быть пустой");
-
-        for (const auto& row : A)
-            if (row.size() != A.size())
-                throw invalid_argument("Матрица должна быть квадратной");
-    }
-
-    /// Метод Данилевского
-    /// @brief Приводит матрицу к форме Фробениуса
-    /// @return Матрица Фробениуса
-    [[nodiscard]] Matrix S() const
-    {
-        Matrix A_ = A;
-        Matrix S = A_;
-
-        if (A_.size() == 1)
-        {
-            // cout << "\nМатрица Фробениуса:";
-            // printMatrix(S, 0);
-            // printPolynomial(S);
-            return S;
-        }
-
-        for (size_t index = A_.size(); (index--) > 1;)
-        {
-            if (abs(Denominator(index, A_)) < eps_)
-            {
-                size_t row = A_.size();
-
-                for (size_t i = 0; i < A_.size(); ++i)
+                for (size_t i = 0; i < cur.size(); ++i)
                 {
-                    if (i != index && abs(A_[i][index - 1]) >= eps_)
+                    if (i != index && abs(cur[i][index - 1]) >= eps_)
                     {
-                        row = i;
+                        swapRow = i;
                         break;
                     }
                 }
 
-                if (row == A_.size())
+                if (swapRow == cur.size())
                     throw runtime_error("Невозможно выбрать опорный элемент");
 
-                swap(A_[index], A_[row]);
+                swap(cur[index], cur[swapRow]);
 
-                for (auto& line : A_)
-                    swap(line[index], line[row]);
+                for (auto& row : cur)
+                    swap(row[index], row[swapRow]);
 
-                if (abs(Denominator(index, A_)) < eps_)
+                if (abs(pivot(index, cur)) < eps_)
                     throw runtime_error("После перестановки опорный элемент близок к нулю");
             }
 
-            const Matrix M_ = M(index, A_);
-            const Matrix M_Inversed_ = M_Inversed(M_);
+            const Matrix T    = buildTransform(index, cur);
+            const Matrix Tinv = invertMatrix(T);
 
-            S = M_Inversed_ * A_ * M_;
-            A_ = S;
-
-            // printMatrix(M_, index);
+            cur = Tinv * cur * T;
         }
 
-        return S;
+        return cur;
     }
 };
