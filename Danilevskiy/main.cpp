@@ -12,11 +12,11 @@ int main()
         {4, 3, 2, 1}
     };
 
-    constexpr double EPS           = 1e-12;
-    constexpr double START         = -10.0;
-    constexpr double END           =  10.0;
-    constexpr size_t COUNT         = 1001;
-    constexpr size_t MAX_ITER      = 100;
+    constexpr double EPS      = 1e-12;
+    constexpr double START    = -10.0;
+    constexpr double END      =  10.0;
+    constexpr size_t COUNT    = 1001;
+    constexpr size_t MAX_ITER = 100;
 
     try
     {

@@ -66,11 +66,7 @@ public:
         cout << "\nСобственные значения:\n";
 
         if (roots.empty())
-        {
-            cout << "Вещественных корней в диапазоне ["
-                 << start_ << "; " << end_ << "] не найдено\n";
-            return;
-        }
+            throw invalid_argument(format("Вещественных корней в диапазоне [{} ;  {}] не найдено", start_, end_));
 
         for (const double root : roots)
             cout << "  λ = " << root << '\n';
